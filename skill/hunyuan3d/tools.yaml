@@ -1,0 +1,115 @@
+tools:
+  - name: submit_hunyuan3d_job
+    description: Submit a Tencent Cloud Hunyuan 3D Pro or Rapid generation job.
+    source_file: scripts/submit_hunyuan3d_job.py
+    execution: sync
+    affinity: any
+    timeout_hint_secs: 30
+    enforce_thread_affinity: true
+    annotations:
+      read_only_hint: false
+      destructive_hint: false
+      idempotent_hint: false
+      open_world_hint: true
+    group: hunyuan3d
+    input_schema:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: Text prompt for text-to-3D. Mutually exclusive with image_url and image_base64 for normal jobs.
+        image_url:
+          type: string
+          description: Public image URL for image-to-3D.
+        image_base64:
+          type: string
+          description: Base64 image content for image-to-3D.
+        job_type:
+          type: string
+          enum: ["pro", "rapid"]
+          default: "pro"
+        model:
+          type: string
+          enum: ["3.0", "3.1"]
+          default: "3.0"
+        generate_type:
+          type: string
+          enum: ["Normal", "LowPoly", "Geometry", "Sketch"]
+          default: "Normal"
+        enable_pbr:
+          type: boolean
+          default: false
+        face_count:
+          type: integer
+          minimum: 3000
+          maximum: 1500000
+          default: 500000
+        result_format:
+          type: string
+          enum: ["STL", "USDZ", "FBX"]
+          description: Optional single export format. Omit for service defaults.
+        region:
+          type: string
+          description: Tencent Cloud region. Defaults to TENCENTCLOUD_REGION or ap-guangzhou.
+        dry_run:
+          type: boolean
+          default: false
+          description: Return the tccli command without executing it.
+    output_schema:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        message:
+          type: string
+        job_id:
+          type: string
+        response:
+          type: object
+        command:
+          type: array
+          items:
+            type: string
+
+  - name: query_hunyuan3d_job
+    description: Query a Tencent Cloud Hunyuan 3D Pro or Rapid generation job.
+    source_file: scripts/query_hunyuan3d_job.py
+    execution: sync
+    affinity: any
+    timeout_hint_secs: 30
+    enforce_thread_affinity: true
+    annotations:
+      read_only_hint: true
+      idempotent_hint: true
+      open_world_hint: true
+    group: hunyuan3d
+    input_schema:
+      type: object
+      required: ["job_id"]
+      properties:
+        job_id:
+          type: string
+        job_type:
+          type: string
+          enum: ["pro", "rapid"]
+          default: "pro"
+        region:
+          type: string
+          description: Tencent Cloud region. Defaults to TENCENTCLOUD_REGION or ap-guangzhou.
+        dry_run:
+          type: boolean
+          default: false
+    output_schema:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        message:
+          type: string
+        response:
+          type: object
+        command:
+          type: array
+          items:
+            type: string
+
