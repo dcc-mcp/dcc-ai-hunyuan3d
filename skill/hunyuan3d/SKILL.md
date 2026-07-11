@@ -17,6 +17,7 @@ metadata:
       - image-to-3d
     search-hint: "hunyuan 3d, hunyuan3d, tencent cloud ai3d, text to 3d, image to 3d, model generation, tccli"
     tools: tools.yaml
+    runtimes: runtimes.yaml
 ---
 
 # Hunyuan3D
