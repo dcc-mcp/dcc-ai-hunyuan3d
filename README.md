@@ -1,6 +1,6 @@
 # DCC-MCP Hunyuan3D
 
-![Workflow showcase](docs/workflow-showcase.png)
+![Workflow showcase](docs/images/dcc-ai-hunyuan3d-showcase.webp)
 
 Tencent Cloud Hunyuan 3D generation tools for DCC-MCP.
 
