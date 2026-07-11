@@ -1,0 +1,7 @@
+runtimes:
+  - name: tccli
+    type: binary
+    binary: tccli
+    description: Tencent Cloud CLI used to submit and query Hunyuan3D jobs.
+    optional: false
+    guidance: Install and configure Tencent Cloud CLI in the adapter environment; the skill never installs binaries or credentials.
