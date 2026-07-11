@@ -1,5 +1,7 @@
 # DCC-MCP Hunyuan3D
 
+![Workflow showcase](docs/workflow-showcase.png)
+
 Tencent Cloud Hunyuan 3D generation tools for DCC-MCP.
 
 This skill is intentionally a thin wrapper around Tencent Cloud CLI. Configure
